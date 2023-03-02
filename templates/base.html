@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="content">
+            <div class="logo"><a href="#">Capture the Flag</a></div>
+            <ul class="menu-list">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('index') }}">Login</a></li>
+                    <li><a href="{{ url_for('index') }}">Register</a></li>
+                    <li><a href="{{ url_for('index') }}">Search</a></li>
+                    <li><a href="{{ url_for('index') }}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+{% block content %}
+{% endblock %}
+</body>
+</html>
