@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 from users.views import users_blueprint
