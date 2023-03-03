@@ -6,3 +6,4 @@ email_validator
 SQLAlchemy
 flask_login
 werkzeug
+bcrypt
