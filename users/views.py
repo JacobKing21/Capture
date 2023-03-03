@@ -69,7 +69,7 @@ def search():
         for i in res:
             list1.append(i[1])
             list2.append(i[2])
-            list2.append(i[3])
+            list3.append(i[3])
         return render_template('search.html', count=len(list1), name=name, form=form,
                                result1=list1, result2=list2, result3=list3)
 
