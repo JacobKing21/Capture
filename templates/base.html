@@ -18,6 +18,9 @@
                     <li><a href="{{ url_for('users.login') }}">Login</a></li>
                     <li><a href="{{ url_for('users.register') }}">Register</a></li>
                 {% endif %}
+            {%  if current_user.is_authenticated and current_user.role=='admin'%}
+                <li><a href="{{ url_for('admin.admin') }}">Admin</a></li>
+            {% endif %}
             {%  if current_user.is_authenticated %}
                     <li><a href="{{ url_for('users.search') }}">Search</a></li>
                     <li><a href="{{ url_for('users.logout') }}">Logout</a></li>

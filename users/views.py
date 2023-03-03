@@ -52,9 +52,10 @@ def login():
     return render_template('login.html', form=form)
 
 
-@users_blueprint.route('/search')
+@users_blueprint.route('/search', methods=['GET', 'POST'])
 def search():
-    return render_template('search.html')
+    form = SearchForm()
+    return render_template('search.html', form=form)
 
 
 @users_blueprint.route('/logout')

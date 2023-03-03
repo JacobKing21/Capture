@@ -1,6 +1,8 @@
 import sqlite3
+from functools import wraps
+
 from flask import Flask, render_template
-from flask_login import UserMixin, LoginManager
+from flask_login import UserMixin, LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 
@@ -8,13 +10,25 @@ from werkzeug.security import generate_password_hash
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SecureKey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ctf.db'
-
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 login_manager.login_view = 'users.login'
+
+
+def requires_roles(*roles):
+    def wrapper(f):
+        @wraps(f)
+        def wrapped(*args, **kwargs):
+            if current_user.role not in roles:
+                # Redirect the user to an unauthorised notice!
+                return render_template('403.html')
+            return f(*args, **kwargs)
+        return wrapped
+    return wrapper
 
 
 class User(db.Model, UserMixin):
@@ -51,36 +65,9 @@ class Product(db.Model):
         self.quantity = quantity
 
 
-def init_db():
-    """Initialization of the database tables
-    """
-    db.drop_all()
-    db.create_all()
+conn = sqlite3.connect('C:/Users/jacob/PycharmProjects/Capture/instance/ctf.db')
+c = conn.cursor()
 
-
-def create_entries():
-    admin = User(role='admin', email='john@gmail.com', password='securepass123')
-    user = User(role='user', email='jsmith@email.com', password='password123')
-    product1 = Product(name='Hoodie', price=30, quantity=5)
-    product2 = Product(name='Jeans', price=25, quantity=6)
-    product3 = Product(name='Socks', price=2, quantity=4)
-    product4 = Product(name='Trainers', price=40.99, quantity=10)
-    product5 = Product(name='Cowboy Boots', price=25, quantity=15)
-    product6 = Product(name='T-Shirt', price=10, quantity=66)
-    product7 = Product(name='Shirt', price=13, quantity=30)
-    product8 = Product(name='Top Hat', price=15.50, quantity=0)
-    db.session.add(admin)
-    db.session.add(user)
-    db.session.add(product1)
-    db.session.add(product2)
-    db.session.add(product3)
-    db.session.add(product4)
-    db.session.add(product5)
-    db.session.add(product6)
-    db.session.add(product7)
-    db.session.add(product8)
-
-    db.session.commit()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -88,8 +75,10 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+from admin.views import admin_blueprint
 from users.views import users_blueprint
 app.register_blueprint(users_blueprint)
+app.register_blueprint(admin_blueprint)
 
 
 @app.route('/')

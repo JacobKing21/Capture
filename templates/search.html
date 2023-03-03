@@ -1,5 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
+<body>
+<div class="container">
+    <form method="POST" action="{{ url_for('users.search') }}" class="search-bar">
+        {{ form.csrf_token() }}
+        <label>
+            {{ form.name(class="input", placeholder="search anything") }}
+        </label>
+        {{ form.submit(class="submit") }}
+    </form>
+</div>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
 
+</table>
+</body>
 {% endblock %}
