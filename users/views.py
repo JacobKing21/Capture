@@ -1,6 +1,4 @@
 import sqlite3
-
-import bcrypt
 from flask import Blueprint, render_template, flash, redirect, url_for, request, session
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
@@ -55,7 +53,27 @@ def login():
 @users_blueprint.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
-    return render_template('search.html', form=form)
+    list1 = []
+    if form.validate_on_submit():
+        name = request.form.get('name')
+        conn = sqlite3.connect('C:/Users/jacob/PycharmProjects/Capture/instance/ctf.db')
+        c = conn.cursor()
+        sql = c.execute("SELECT * FROM Product WHERE name LIKE '%s'" % name)
+        res = sql.fetchall()
+
+        list1 = []
+        list2 = []
+        list3 = []
+
+        print(res)
+        for i in res:
+            list1.append(i[1])
+            list2.append(i[2])
+            list2.append(i[3])
+        return render_template('search.html', count=len(list1), name=name, form=form,
+                               result1=list1, result2=list2, result3=list3)
+
+    return render_template('search.html', form=form, count=len(list1))
 
 
 @users_blueprint.route('/logout')
@@ -63,4 +81,3 @@ def search():
 def logout():
     logout_user()
     return redirect(url_for('index'))
-

@@ -6,7 +6,7 @@
     <form method="POST" action="{{ url_for('users.search') }}" class="search-bar">
         {{ form.csrf_token() }}
         <label>
-            {{ form.name(class="input", placeholder="search anything") }}
+            {{ form.name(class="name", placeholder="search anything") }}
         </label>
         {{ form.submit(class="submit") }}
     </form>
@@ -17,7 +17,13 @@
         <th>Price</th>
         <th>Quantity</th>
     </tr>
-
+{% for i in range(count) %}
+    <tr>
+        <td>{{ result1[i] }}</td>
+        <td>{{ result2[i] }}</td>
+        <td>{{ result3[i] }}</td>
+    </tr>
+{% endfor %}
 </table>
 </body>
 {% endblock %}

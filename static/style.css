@@ -171,3 +171,11 @@ label a{
     color: white;
     margin-bottom: 15px;
 }
+table, th, td{
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    width: 50%;
+    height: 50%;
+}
