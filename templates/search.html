@@ -8,7 +8,7 @@
         <label>
             {{ form.name(class="name", placeholder="search anything") }}
         </label>
-        {{ form.submit(class="submit") }}
+        {{ form.submit(class="small-submit") }}
     </form>
 </div>
 <table>
@@ -17,11 +17,11 @@
         <th>Price</th>
         <th>Quantity</th>
     </tr>
-{% for i in range(count) %}
+{% for row in res %}
     <tr>
-        <td>{{ result1[i] }}</td>
-        <td>{{ result2[i] }}</td>
-        <td>{{ result3[i] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
     </tr>
 {% endfor %}
 </table>

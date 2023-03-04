@@ -51,7 +51,7 @@
 .container{
     width: 100%;
     padding: 5%;
-    min-height: 100vh;
+    min-height: 50vh;
     background: lightskyblue;
     background-size: cover;
     display: flex;
@@ -147,6 +147,17 @@ i{
     cursor: pointer;
     transition: .3s;
 }
+.small-submit{
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    height: 45px;
+    outline: none;
+    width: 20%;
+    background: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: .3s;
+}
 .submit:hover{
     box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
 }
@@ -172,10 +183,19 @@ label a{
     margin-bottom: 15px;
 }
 table, th, td{
-    border: 1px solid;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: auto;
     width: 50%;
     height: 50%;
+}
+th{
+    background-color: navy;
+    text-align: left;
+    color: white;
+}
+td{
+    border: 1px solid #ddd;
+    padding: 8px;
+    background: white;
 }

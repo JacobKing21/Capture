@@ -53,27 +53,21 @@ def login():
 @users_blueprint.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
-    list1 = []
     if form.validate_on_submit():
         name = request.form.get('name')
         conn = sqlite3.connect('C:/Users/jacob/PycharmProjects/Capture/instance/ctf.db')
         c = conn.cursor()
-        sql = c.execute("SELECT * FROM Product WHERE name LIKE '%s'" % name)
-        res = sql.fetchall()
+        try:
+            sql = c.execute("SELECT * FROM Product WHERE name LIKE '"'%'+name+'%'"';")
+            res = sql.fetchall()
+        except TypeError:
+            return render_template('search.html', form=form)
+        except sqlite3.OperationalError:
+            return render_template('search.html', form=form)
 
-        list1 = []
-        list2 = []
-        list3 = []
+        return render_template('search.html', name=name, form=form, res=res)
 
-        print(res)
-        for i in res:
-            list1.append(i[1])
-            list2.append(i[2])
-            list3.append(i[3])
-        return render_template('search.html', count=len(list1), name=name, form=form,
-                               result1=list1, result2=list2, result3=list3)
-
-    return render_template('search.html', form=form, count=len(list1))
+    return render_template('search.html', form=form)
 
 
 @users_blueprint.route('/logout')
