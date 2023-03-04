@@ -53,6 +53,11 @@ def login():
 @users_blueprint.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
+
+    conn = sqlite3.connect('C:/Users/jacob/PycharmProjects/Capture/instance/ctf.db')
+    c = conn.cursor()
+    res = c.execute("SELECT * FROM Product")
+
     if form.validate_on_submit():
         name = request.form.get('name')
         conn = sqlite3.connect('C:/Users/jacob/PycharmProjects/Capture/instance/ctf.db')
@@ -60,6 +65,7 @@ def search():
         try:
             sql = c.execute("SELECT * FROM Product WHERE name LIKE '"'%'+name+'%'"';")
             res = sql.fetchall()
+            c.close()
         except TypeError:
             return render_template('search.html', form=form)
         except sqlite3.OperationalError:
@@ -67,7 +73,7 @@ def search():
 
         return render_template('search.html', name=name, form=form, res=res)
 
-    return render_template('search.html', form=form)
+    return render_template('search.html', form=form, res=res)
 
 
 @users_blueprint.route('/logout')
