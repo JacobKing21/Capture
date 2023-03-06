@@ -1,6 +1,4 @@
-import sqlite3
 from functools import wraps
-
 from flask import Flask, render_template
 from flask_login import UserMixin, LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
@@ -41,13 +39,15 @@ class User(db.Model, UserMixin):
     # User auth information
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
+    flag_recon = db.Column(db.Integer, nullable=False, default=0)
 
     # User constructor
-    def __init__(self, role, email, password):
+    def __init__(self, role, email, password, flag_recon):
         self.role = role
         self.email = email
         # Generating password hash
         self.password = generate_password_hash(password)
+        self.flag_recon = flag_recon
 
 
 class Product(db.Model):
@@ -65,8 +65,9 @@ class Product(db.Model):
         self.quantity = quantity
 
 
-conn = sqlite3.connect('C:/Users/jacob/PycharmProjects/Capture/instance/ctf.db')
-c = conn.cursor()
+def init_db():
+    db.drop_all()
+    db.create_all()
 
 
 @login_manager.user_loader

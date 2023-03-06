@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for, request,
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
 from app import User, db
+from users.flags import flag_recon
 from users.forms import RegisterForm, LoginForm, SearchForm
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
@@ -20,7 +21,8 @@ def register():
 
         new_user = User(role='user',
                         email=form.email.data,
-                        password=form.password.data)
+                        password=form.password.data,
+                        flag_recon=0)
 
         db.session.add(new_user)
         db.session.commit()
@@ -74,6 +76,44 @@ def search():
         return render_template('search.html', name=name, form=form, res=res)
 
     return render_template('search.html', form=form, res=res)
+
+
+@users_blueprint.route('/reconnaissance')
+def reconnaissance():
+    return render_template('reconnaissance.html')
+
+
+@users_blueprint.route('/tasks')
+def tasks():
+    return render_template('tasks.html')
+
+
+@users_blueprint.route('/submit', methods=['GET', 'POST'])
+def submit():
+
+    form = SearchForm()
+
+    conn = sqlite3.connect('C:/Users/jacob/PycharmProjects/Capture/instance/ctf.db')
+    c = conn.cursor()
+    sql = c.execute("SELECT flag_recon FROM User WHERE id=?", (current_user.id,))
+    flag_value_rec1 = sql.fetchone()
+
+    if form.validate_on_submit():
+        name = request.form.get('name')
+
+        if name == flag_recon:
+            c.execute("UPDATE User SET flag_recon = 1 WHERE id=?", (current_user.id,))
+            conn.commit()
+            flash('Correct flag, well done!', 'success')
+        else:
+            flash('Incorrect flag, try again!', 'error')
+
+        sql = c.execute("SELECT flag_recon FROM User WHERE id=?", (current_user.id,))
+        flag_value_rec1 = sql.fetchone()
+
+        return render_template('submit.html', form=form, flag_value_rec1=flag_value_rec1)
+
+    return render_template('submit.html', form=form, flag_value_rec1=flag_value_rec1)
 
 
 @users_blueprint.route('/logout')

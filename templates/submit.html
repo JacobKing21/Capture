@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+<div class="container">
+    <form method="POST" action="{{ url_for('users.submit') }}" class="search-bar">
+        {{ form.csrf_token() }}
+        <label>
+            {{ form.name(class="name", placeholder="Submit Flags") }}
+        </label>
+        {{ form.submit(class="small-submit") }}
+    </form>
+</div>
+<h3>Reconnaissance Progress</h3>
+{% if flag_value_rec1 == (0,) %}
+<div class="meter">
+	<span style="width: 25%"></span>
+</div>
+{% endif %}
+{% if flag_value_rec1 == (1,) %}
+<div class="meter">
+	<span style="width: 100%"></span>
+</div>
+{% endif %}
+{% endblock %}
