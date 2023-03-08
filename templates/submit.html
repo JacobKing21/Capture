@@ -10,10 +10,10 @@
         {{ form.submit(class="small-submit") }}
     </form>
 </div>
-<h3>Reconnaissance Progress</h3>
 {% if flag_value_rec1 == (0,) %}
-<div class="meter">
-	<span style="width: 25%"></span>
+<h3>Reconnaissance Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
 </div>
 {% endif %}
 {% if flag_value_rec1 == (1,) %}
@@ -21,4 +21,56 @@
 	<span style="width: 100%"></span>
 </div>
 {% endif %}
+<h3>Resource Development Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Initial Access Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Execution Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Persistence Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Privilege Escalation Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Defense Evasion Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Credential Access Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Discovery Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Lateral Movement Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Collection Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Command and Control Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Exfiltration Progress</h3>
+<div class="meter">0%
+	<span style="width: 0"></span>
+</div>
+<h3>Impact Progress</h3>
+<div class="meter">0%
+	<span style="width: 0">0%</span>
+</div>
 {% endblock %}

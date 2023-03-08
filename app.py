@@ -29,8 +29,8 @@ def requires_roles(*roles):
     return wrapper
 
 
-class User(db.Model, UserMixin):
-    __tablename__ = 'User'
+class users(db.Model, UserMixin):
+    __tablename__ = 'users'
 
     # User information
     id = db.Column(db.Integer, primary_key=True)
@@ -50,9 +50,9 @@ class User(db.Model, UserMixin):
         self.flag_recon = flag_recon
 
 
-class Product(db.Model):
+class products(db.Model):
 
-    __tablename__ = 'Product'
+    __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -73,7 +73,7 @@ def init_db():
 @login_manager.user_loader
 def load_user(user_id):
     """Getting the user id from login manager to determine which user is logged in"""
-    return User.query.get(int(user_id))
+    return users.query.get(int(user_id))
 
 
 from admin.views import admin_blueprint

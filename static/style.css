@@ -66,6 +66,15 @@
     align-items: center;
     justify-content: center;
 }
+.small-container{
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    min-height: auto;
+    min-width: auto;
+    color: black;
+}
 .search-bar{
     width: 100%;
     max-width: 700px;
@@ -163,8 +172,19 @@ i{
     font-size: 15px;
     height: 45px;
     outline: none;
-    width: 20%;
+    width: 10%;
     background: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: .3s;
+}
+.blog-submit{
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    height: 45px;
+    outline: none;
+    width: 100%;
+    background: orange;
     cursor: pointer;
     transition: .3s;
 }
@@ -362,7 +382,9 @@ img{
   width: 75%;
   justify-items: center;
   margin: auto;
-
+  margin-bottom: 20px;
+  color: white;
+  text-align: center;
 }
 .meter > span {
   display: block;
@@ -379,4 +401,13 @@ img{
 }
 h3{
     text-align: center;
+}
+.text-box{
+    min-width: 500px;
+    min-height: 100px;
+    background: orange;
+    justify-content: center;
+    justify-items: center;
+    margin: auto;
+
 }

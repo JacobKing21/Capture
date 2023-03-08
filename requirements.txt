@@ -7,3 +7,4 @@ SQLAlchemy
 flask_login
 werkzeug
 bcrypt
+selenium
