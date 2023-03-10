@@ -65,7 +65,7 @@ def search():
         conn = sqlite3.connect('C:/Users/jacob/PycharmProjects/Capture/instance/ctf.db')
         c = conn.cursor()
         try:
-            sql = c.execute("" + name + '%'"';")
+            sql = c.execute("SELECT * FROM products WHERE name LIKE '"'%'+name+'%'"';")
             res = sql.fetchall()
             c.close()
         except TypeError:

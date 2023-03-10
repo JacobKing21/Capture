@@ -25,5 +25,28 @@
     </tr>
 {% endfor %}
 </table>
+
+<h2>Hints
+    <a id="hint-num">0</a>/3
+    (
+    <a href="#" onclick="showHint(); return false">show</a>
+    )
+</h2>
+<div id="hints">
+    <ol>
+        <li style="display: none" data-hidden="true">
+            <b>1.</b>
+            This search bar is connected to a SQLite database which is vulnerable to an SQL injection attack.
+        </li>
+        <li style="display: none" data-hidden="true">
+            <b>2.</b>
+
+        </li>
+        <li style="display: none" data-hidden="true">
+            <b>3.</b>
+            This is hint 3
+        </li>
+    </ol>
+</div>
 </body>
 {% endblock %}

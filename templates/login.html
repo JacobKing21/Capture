@@ -57,5 +57,27 @@
     </div>
 </div>
 </form>
-
+<h2>Hints
+    <a id="hint-num">0</a>/3
+    (
+    <a href="#" onclick="showHint(); return false">show</a>
+    )
+</h2>
+<div id="hints">
+    <ol>
+        <li style="display: none" data-hidden="true">
+            <b>1.</b>
+            This login form doesn't limit the amount of login attempts.
+        </li>
+        <li style="display: none" data-hidden="true">
+            <b>2.</b>
+            If you're able to find an admins email, you could brute force log in.
+        </li>
+        <li style="display: none" data-hidden="true">
+            <b>3.</b>
+            Using a Kali Linux virtual machine, there are tools such as John the Ripper or Hydra to crack passwords,
+            which can use built-in wordlists such as rockyou.txt.
+        </li>
+    </ol>
+</div>
 {% endblock %}
